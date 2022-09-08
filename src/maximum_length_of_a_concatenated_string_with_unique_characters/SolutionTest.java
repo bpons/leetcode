@@ -10,8 +10,10 @@ class SolutionTest {
 
     @Test
     void testMaxLength() {
-        String[] input = {"abc","def","bp","dq","eg","fh"};
+//        String[] input = {"abc","def","bp","dq","eg","fh","gxyz"};
+        String[] input = {"ab","cd","cde","cdef","efg","fgh","abxyz"};
         Solution s = new Solution();
-        assertEquals(9, s.maxLength(Arrays.asList(input)));
+        assertEquals(11, s.maxLength(Arrays.asList(input)));
     }
 }
+
