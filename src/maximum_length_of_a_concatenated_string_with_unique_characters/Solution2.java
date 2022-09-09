@@ -2,10 +2,8 @@ package maximum_length_of_a_concatenated_string_with_unique_characters;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentSkipListSet;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
 
-class Solution {
+class Solution2 {
     public int maxLength(List<String> arr) {
 
         int i = 0;
@@ -14,27 +12,26 @@ class Solution {
         if (i == arr.size()-1 && !hasNoDuplicate(arr.get(i)))
             return 0;
 
-//        Set<String> concats = new ConcurrentSkipListSet<>();
-        //TODO: Does not work???
-        Set<String> concats = new ConcurrentSkipListSet<>(Comparator.comparing(String::length).reversed().thenComparing(s -> s));
+        List<String> concats = new ArrayList<>();
         concats.add(arr.get(i));
+        int result = arr.get(i).length();
         i++;
         while (i < arr.size()) {
             String nextS = arr.get(i);
-            concats.forEach(s -> {
-                String concat = s + nextS;
-                if (hasNoDuplicate(concat))
+            for (int j = 0; j < concats.size(); j++) {
+                String concat = concats.get(j) + nextS;
+                if (hasNoDuplicate(concat)) {
                     concats.add(concat);
-            });
-            if (hasNoDuplicate(nextS))
+                    result = Math.max(concat.length(), result);
+                }
+            };
+            if (hasNoDuplicate(nextS)) {
                 concats.add(nextS);
+                result = Math.max(nextS.length(), result);
+            }
             i++;
         }
-//        System.out.println(concats);
-//        List<String> sortedConcats = new ArrayList<>(concats);
-//        Collections.sort(sortedConcats, Comparator.comparing(String::length).reversed());
-//        return sortedConcats.get(0).length();
-        return concats.iterator().next().length();
+        return result;
     }
 
 

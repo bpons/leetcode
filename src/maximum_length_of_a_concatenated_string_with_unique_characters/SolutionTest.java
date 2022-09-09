@@ -12,7 +12,7 @@ class SolutionTest {
     void testMaxLength() {
 //        String[] input = {"abc","def","bp","dq","eg","fh","gxyz"};
         String[] input = {"ab","cd","cde","cdef","efg","fgh","abxyz"};
-        Solution s = new Solution();
+        Solution2 s = new Solution2();
         assertEquals(11, s.maxLength(Arrays.asList(input)));
     }
 }
